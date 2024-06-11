@@ -1,0 +1,11 @@
+psycopg2-binary
+python-dotenv
+langchain
+langchain-openai
+langchain_experimental
+Flask
+flask-cors
+pyepsilla
+sentence_transformers
+pypdf
+tiktoken

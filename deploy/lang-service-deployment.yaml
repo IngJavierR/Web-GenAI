@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: lang-service-dep
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: lang-service-pod
+  template:
+    metadata:
+      labels:
+        app: lang-service-pod
+    spec:
+      containers:
+      - name: lang-service-container
+        image: 
+        ports:
+        - containerPort: 8095
+        imagePullPolicy: Always
+        env:
+        - name: TOKENIZERS_PARALLELISM
+          value: "True"
+        - name: OPENAI_API_KEY
+          value: 
+        - name: DATABASE
+          value: postgres
+        - name: DBPASS
+          value: 
+        - name: DBUSER
+          value: postgres
+        - name: IPDB
+          value: 
+        - name: EPSILLA_IP
+          value: epsilla-svc.default.svc.cluster.local
+        - name: EPSILLA_PORT
+          value: "8888"
+        - name: TZ
+          value: America/Mexico_City
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: lang-service-svc
+spec:
+  selector:
+    app: lang-service-pod
+  ports:
+  - port: 8095
+    protocol: TCP
+    targetPort: 8095
+  type: LoadBalancer

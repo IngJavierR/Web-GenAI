@@ -1,0 +1,31 @@
+<div class="chatbot-container">
+    <mat-card class="chatbot-card">
+      <div class="btn-container">
+        <span style="font-size: 30px; color: #ffffff;">GenAI</span>
+        <img src="./assets/Logo_Axity_Color.png" width="100" height="50" alt="axity">
+        <img src="./assets/aws_white_logo.png" width="100" height="50" alt="axity">
+      </div>
+      <div class="btn-container">
+        <button mat-raised-button color="primary" (click)="mode(0)">ModeSQL</button>
+        <button mat-raised-button color="primary" (click)="mode(1)">ModeDocuments</button>
+        <span class="span-text">Activo ahora: {{modeType ? 'Documents' : 'SQL'}}</span>
+      </div>
+      <mat-card-content class="chatbot-messages" #scrollMe>
+        <div *ngFor="let message of messages" class="message">
+          <div [ngClass]="{'user-message': message.isUser, 'bot-message': !message.isUser}">
+            {{message.text}}
+          </div>
+        </div>
+      </mat-card-content>
+      <mat-card-actions class="chatbot-actions">
+        <mat-form-field class="input-field" appearance="fill">
+          <mat-label>Haz una pregunta</mat-label>
+          <input matInput [(ngModel)]="userInput" (keyup.enter)="sendMessage(false)">
+        </mat-form-field>
+        <button mat-mini-fab color="primary" (click)="actionRecording()">
+          <mat-icon>{{btnIcon}}</mat-icon>
+        </button>
+        <button mat-raised-button color="primary" (click)="sendMessage(false)">Enviar</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>

@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend-dep
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: frontend-pod
+  template:
+    metadata:
+      labels:
+        app: frontend-pod
+    spec:
+      containers:
+      - name: frontend-container
+        image: 
+        ports:
+        - containerPort: 80
+        imagePullPolicy: Always
+        env:
+        - name: TZ
+          value: America/Mexico_City
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend-svc
+spec:
+  selector:
+    app: frontend-pod
+  ports:
+  - port: 8000
+    protocol: TCP
+    targetPort: 80
+  type: LoadBalancer
