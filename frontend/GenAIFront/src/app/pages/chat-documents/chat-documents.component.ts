@@ -23,6 +23,9 @@ export class ChatDocumentsComponent implements OnInit {
   @ViewChild('scrollMe') private myScrollContainer: ElementRef | undefined;
 
   public isUserSpeaking: boolean = false;
+  selectedFile: any;
+  fileName = '';
+  formData = new FormData()
 
   constructor(
     private fb: FormBuilder,
@@ -71,6 +74,22 @@ export class ChatDocumentsComponent implements OnInit {
     }
   }
 
+  onFileSelected(event: any) {
+    this.selectedFile = (event.target as HTMLInputElement).files;
+    
+    console.log("Files", this.selectedFile[0].name);
+    
+    if(this.selectedFile) {
+      const file = this.selectedFile[0];
+      let fileBlob = new Blob([file], {type: this.selectedFile.type});
+      
+      this.formData = new FormData();
+      this.formData.append("files[]", fileBlob, this.selectedFile[0].name);
+      this.formData.append("catalog", "chatbot");
+      this.langService.fileUpload(this.formData).subscribe((response: any)=> {});
+   }
+  }
+
   sendMessage(isAudio: boolean) {
     if (this.userInput.trim()) {
       let query = this.userInput;
@@ -95,7 +114,7 @@ export class ChatDocumentsComponent implements OnInit {
       }
 
       else if(this.modeType === 0){ 
-        this.langService.querySql(query).subscribe((response: QueryResponse) => {
+        this.langService.querySql(query, 'itsm').subscribe((response: QueryResponse) => {
           if(isAudio){
             this.voiceRecognition.speech(response.result);
           }

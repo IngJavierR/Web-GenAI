@@ -1,0 +1,62 @@
+html, body {
+  height: 100%;
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.container {
+  display: flex;
+  height: 100vh;
+  background: #6c6b6b;
+}
+
+.main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+
+.top-right-logo {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.top-right-logo img {
+  width: 50px;
+}
+
+.content {
+  flex: 1;
+  background: white;
+  margin: 20px 0;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  /* background-image: url('../../../assets/hoja.png'); */
+  /* background-repeat: no-repeat; */
+}
+
+.bottom-menu {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 10px;
+}
+
+.menu-button {
+  font-size: 14px;
+  background: linear-gradient(90deg, #f8f8f8, #ffffff);
+  border-radius: 20px;
+  padding: 10px 20px;
+}
+
+.input-container {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+}
+
+.full-width {
+  width: 100%;
+  margin-right: 20px;
+}

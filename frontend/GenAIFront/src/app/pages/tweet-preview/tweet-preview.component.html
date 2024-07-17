@@ -1,0 +1,71 @@
+<div class="container">
+    
+  <mat-card class="upload-section">
+      <mat-card-content>
+        <mat-form-field class="full-width" appearance="fill">
+          <mat-label>Texto para generar publicación</mat-label>
+          <input matInput [(ngModel)]="prompt">
+        </mat-form-field>
+        <input type="file" (change)="onFileSelected($event)" accept=".pdf">
+        <button mat-raised-button color="primary" *ngIf="fileName" (click)="uploadFile()">Cargar Archivo</button>
+        <div class="button-section">
+            <mat-checkbox [(ngModel)]="isImageRequired">Incluir imagen</mat-checkbox>
+            <mat-checkbox [(ngModel)]="isContextRequired">Incluir contexto del archivo</mat-checkbox>
+            <button mat-raised-button color="primary" (click)="generatePreview()">Generar Vista Previa</button>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+  <div class="previews">
+    <mat-card class="preview-section" *ngIf="previewGenerated">
+      <mat-card-header>
+        <mat-card-title>
+          <img src="./assets/x-twitter-logo.webp" width="50" height="50" alt="axity">
+          Vista Previa del Tuit
+        </mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <p>{{ tweetText }}</p>
+        <img class="image-container" *ngIf="image" [src]="image" alt="Preview del tuit">
+      </mat-card-content>
+      <button mat-raised-button color="accent" [disabled]="!previewGenerated" (click)="publishTweet()">Publicar Tuit</button>
+    </mat-card>
+
+    <mat-card class="preview-section" *ngIf="previewGenerated">
+      <mat-card-header>
+        <mat-card-title>
+          <img src="./assets/facebook.png" width="50" height="50" alt="axity">
+          Vista Previa del Post
+        </mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <p>{{ postText }}</p>
+        <img class="image-container" *ngIf="image" [src]="image" alt="Preview del post">
+      </mat-card-content>
+      <button mat-raised-button color="accent" [disabled]="!previewGenerated" (click)="publishFacebook()">Publicar Facebook</button>
+    </mat-card>
+
+    <mat-card class="preview-section" *ngIf="previewGenerated">
+      
+      <mat-card-header>
+        <mat-card-title>
+          <img src="./assets/email_logo.png" width="50" height="50" alt="axity">
+          Vista Previa del Email
+        </mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="mail-container">
+          <img src="assets/email_banner.png" width="600" height="100" alt="Email banner">
+          <div class="email-text-container">
+            <div [innerHTML]="emailText"></div>
+            <img class="image-container" *ngIf="image" [src]="image" alt="Preview del post">
+          </div>
+          <img src="assets/email_footer.png" width="600" height="100" alt="Email footer">
+        </div>
+        
+      </mat-card-content>
+      <button mat-raised-button color="accent" [disabled]="!previewGenerated" (click)="publishFacebook()">Enviar Email</button>
+    </mat-card>
+  </div>
+
+</div>

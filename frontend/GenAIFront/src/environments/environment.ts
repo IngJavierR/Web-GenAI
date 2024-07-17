@@ -5,7 +5,10 @@
 export const environment = {
   production: false,
   chat_sql: 'http://localhost:8095/qna',
-  chat_documents: 'http://localhost:8095/doc'
+  chat_documents: 'http://localhost:8095/doc',
+  content: 'http://localhost:8095/content',
+  files: 'http://localhost:8095/files',
+  recipe: 'http://localhost:8095/recipe'
 };
 
 /*

@@ -10,6 +10,7 @@
         <button mat-raised-button color="primary" (click)="mode(1)">ModeDocuments</button>
         <span class="span-text">Activo ahora: {{modeType ? 'Documents' : 'SQL'}}</span>
       </div>
+      <input type="file" (change)="onFileSelected($event)" accept=".pdf">
       <mat-card-content class="chatbot-messages" #scrollMe>
         <div *ngFor="let message of messages" class="message">
           <div [ngClass]="{'user-message': message.isUser, 'bot-message': !message.isUser}">

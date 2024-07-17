@@ -1,1 +1,26 @@
-<app-chat-documents></app-chat-documents>
+<div class="container">
+    <div class="sidebar">
+      <div class="logo">
+        <img src="./assets/Logo_Axity_Blanco.png" alt="Logo">
+      </div>
+      <div class="menu-title">
+        <mat-icon>menu</mat-icon>
+        <span>Menus</span>
+      </div>
+      <button mat-button class="menu-item" routerLink="/chat">
+        <mat-icon>forum</mat-icon>
+        Chat
+      </button>
+      <button mat-button class="menu-item" routerLink="/content">
+        <mat-icon>mms</mat-icon>
+        Content Manager
+      </button>
+      <button mat-button class="menu-item" routerLink="/recipe">
+        <mat-icon>restaurant</mat-icon>
+        Intelligent Recipes
+      </button>
+    </div>
+    <div class="main-content">
+        <router-outlet></router-outlet>
+    </div>
+</div>

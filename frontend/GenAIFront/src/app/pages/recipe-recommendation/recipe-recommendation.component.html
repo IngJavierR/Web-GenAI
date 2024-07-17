@@ -1,0 +1,30 @@
+<div class="container">
+  <div class="main-content">
+    <div class="top-right-logo">
+      <img src="./assets/Logo_Axity_Color.png" alt="Logo">
+    </div>
+    <div class="content">
+      <h1 *ngIf="urls"><p>Puedes preparar:</p></h1>
+      <h3 >{{recipeName}}</h3>
+      <h1 *ngIf="urls"><p>Te recomiendo preparar lo siguiente:</p></h1>
+      <h3 *ngFor="let recipe of recipes">{{recipe}}</h3>
+      <h1 *ngIf="urls"><p>Vas a necesitar estos ingredientes:</p></h1>
+      <h3 *ngFor="let ingredient of ingredients">{{ingredient}}</h3>
+      <h1 *ngIf="urls"><p>Sabías que los ingredientes que te faltan los puedes encontrar en Walmart:</p></h1>
+      <h3 [innerHTML]="urls"></h3>
+    </div>
+    <div class="bottom-menu">
+      <button mat-button class="menu-button">Breakfast Menu</button>
+      <button mat-button class="menu-button">Lunch Menu</button>
+      <button mat-button class="menu-button">Dinner Menu</button>
+      <button mat-button class="menu-button">Snacks</button>
+    </div>
+    <div class="input-container">
+      <mat-form-field class="full-width">
+        <input matInput [(ngModel)]="userInput" placeholder="Hi, I'm looking for a quick and easy breakfast recipe." (keyup.enter)="sendMessage()">
+      </mat-form-field>
+      <button mat-raised-button color="primary" (click)="sendMessage()">Enviar</button>
+    </div>
+  </div>
+</div>
+  

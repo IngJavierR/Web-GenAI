@@ -9,3 +9,6 @@ pyepsilla
 sentence_transformers
 pypdf
 tiktoken
+boto3
+tweepy
+faker
