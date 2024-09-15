@@ -53,6 +53,34 @@ def generate_image(content):
         'image_base64': base64_image_data
     }
 
+def generate_image_sdxl(content):
+    prompt = f"""
+        Genera una imagen que pueda representar de la mejor forma el siguente contenido
+        Contenido: {content}
+        """
+
+    body = {"text_prompts": [{"text": prompt}]}
+
+    response = bedrock_runtime.invoke_model(
+        modelId='stability.stable-diffusion-xl-v1',
+        body=json.dumps(body)
+    )
+
+    response_body = json.loads(response["body"].read())
+    base64_image_data = response_body["artifacts"][0]["base64"]
+
+    image = base64.b64decode(base64_image_data, validate=True)
+    image_name = 'generated_image'
+    image_path = f"images/{image_name}.png"
+    with open(image_path, 'wb') as image_file:
+        image_file.write(image)
+
+    print('Imagen generada')
+    return {
+        'image_name': image_name,
+        'image_base64': base64_image_data
+    }
+
 def generate_content(prompt):
     print('Generating content')
     model_kwargs_titan = {"temperature": 0.5}
