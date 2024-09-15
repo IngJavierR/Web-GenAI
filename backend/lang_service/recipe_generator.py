@@ -10,7 +10,7 @@ llm = ChatOpenAI(model="gpt-4o", temperature=0)
 
 def recipe_generator(query):
     recipe = generate_recipe(query)
-    urls = get_urls_market(recipe['prompt_ingredients'])
+    urls = get_urls_market(recipe['query_ingredients'])
 
     return {
         'recipe_name': recipe['recipe_name'],
@@ -45,7 +45,7 @@ def generate_recipe(query):
                 recipe_name:
                 recipes:
                 ingredients:
-                prompt_ingredients:
+                query_ingredients:
 
                 recipe_name tendrá el nombre de la receta
                 recipes tendrá los pasos en formato de lista para elaborar la receta 
@@ -58,9 +58,9 @@ def generate_recipe(query):
 
     ai_message = llm.invoke(messages)
     response = ai_message.content
-    print('response', response)
     response = response.replace("```json", "")
     response = response.replace("```", "")
+    print('response', response)
 
     return json.loads(response)
 
