@@ -40,7 +40,7 @@ def code_explanation(code):
 
                 Al código fuente: {code}
 
-                Retorna solo la explicación en formato de texto con saltos de linea escapados dentro de un json en una variable llamada: result.
+                Retorna solo la explicación en formato de texto con saltos de linea &#13;&#10; dentro de un json en una variable llamada: result.
             """}
         ]}
     ]
