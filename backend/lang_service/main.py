@@ -3,6 +3,7 @@ from db_answer import answer_db_question
 from documents import answer_chatbot_question, insert_files, reset_db
 from content_generator import post_content, get_preview_content
 from recipe_generator import recipe_generator
+from code_generator import code_suggestion, code_explanation, code_files_image_based, code_files
 from flask_cors import CORS, cross_origin
 
 app = Flask(__name__)
@@ -118,6 +119,39 @@ def get_recipe():
         print('query', query)
 
         response = recipe_generator(query)
+
+        print('Response: ', response)
+        return jsonify(response), 200
+    except Exception as error:
+        print('Error', error)
+        return jsonify({"Status":"Failure --- some error occured"}), 400
+
+@app.route('/code',methods = ["POST"])
+def get_code():
+    try:
+        input_json = request.get_json(force=True)
+        print('input_json', input_json)
+
+        prompt = input_json["prompt"]
+        code = input_json["code"]
+        operationType = input_json["operationType"]
+        file = input_json["file"]
+        fileType = input_json["fileType"]
+        print('prompt', prompt)
+        print('code', code)
+        print('operationType', operationType)
+        print('file', file)
+        print('fileType', fileType)
+
+        response = ''
+        if  operationType == 'devchat':
+            response = code_suggestion(prompt, code)
+        elif operationType == 'codeexplain':
+            response = code_explanation(code)
+        elif operationType == 'imageToCode':
+            response = code_files_image_based(prompt, file)
+        elif operationType == 'devCode':
+            response = code_files(prompt, code)
 
         print('Response: ', response)
         return jsonify(response), 200
