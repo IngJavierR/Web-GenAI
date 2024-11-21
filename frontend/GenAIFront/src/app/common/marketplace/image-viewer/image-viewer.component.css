@@ -1,0 +1,84 @@
+.image-viewer {
+    display: flex;
+    gap: 16px;
+    font-family: 'Arial', sans-serif;
+}
+
+/* Horizontal Layout */
+.image-viewer.horizontal-layout {
+    flex-direction: column;
+    /* Imagen principal arriba, miniaturas abajo */
+    align-items: center;
+    /* Centrar contenido horizontal */
+}
+
+/* Vertical Layout */
+.image-viewer.vertical-layout {
+    flex-direction: row;
+    /* Miniaturas a la izquierda, imagen principal a la derecha */
+    align-items: flex-start;
+    /* Alinear contenido vertical */
+}
+
+/* Imagen Principal */
+.main-image-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 400px;
+    height: 400px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.main-image {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+}
+
+/* Contenedor de Miniaturas */
+.thumbnail-container {
+    display: flex;
+    gap: 8px;
+    overflow: auto;
+    /* Scroll automático */
+}
+
+/* Miniaturas en Carrusel Horizontal */
+.image-viewer.horizontal-layout .thumbnail-container {
+    flex-direction: row;
+    /* Miniaturas en fila */
+    justify-content: center;
+    margin-top: 16px;
+    /* Espaciado entre imagen principal y miniaturas */
+}
+
+/* Miniaturas en Carrusel Vertical */
+.image-viewer.vertical-layout .thumbnail-container {
+    flex-direction: column;
+    /* Miniaturas en columna */
+    margin-right: 16px;
+    /* Espaciado entre miniaturas e imagen principal */
+    max-height: 400px;
+    /* Altura fija */
+}
+
+/* Estilos de Miniaturas */
+.thumbnail {
+    width: 80px;
+    height: 80px;
+    border: 2px solid transparent;
+    border-radius: 4px;
+    cursor: pointer;
+    object-fit: cover;
+}
+
+.thumbnail:hover {
+    border-color: #aaa;
+}
+
+.thumbnail.selected {
+    border-color: #007bff;
+}

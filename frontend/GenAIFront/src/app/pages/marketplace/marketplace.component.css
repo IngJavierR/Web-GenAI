@@ -1,0 +1,9 @@
+.container {
+  padding: 16px;
+}
+
+.marketplaces {
+  display: flex;
+  gap: 16px;
+  margin-top: 20px;
+}

@@ -1,0 +1,21 @@
+<div class="container">
+  <!-- Botón para hacer la solicitud -->
+  <button
+    mat-raised-button
+    color="primary"
+    (click)="fetchProductData()">
+    {{ isLoading ? 'Cargando...' : 'Publicar producto a Marketplaces' }}
+  </button>
+  
+  <h1>Amazon Preview</h1>
+  <div *ngIf="productData" class="marketplaces">
+    <app-product-card [product]="productData"></app-product-card>
+    <app-product-detail [product]="productData"></app-product-detail>
+  </div>
+  
+  <h1>Mercado Libre Preview</h1>
+  <div *ngIf="productData" class="marketplaces">
+    <app-product-card-ml [product]="productData"></app-product-card-ml>
+    <app-product-detail-ml [product]="productData"></app-product-detail-ml>
+  </div>
+</div>

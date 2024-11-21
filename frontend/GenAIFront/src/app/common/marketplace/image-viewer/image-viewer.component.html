@@ -1,0 +1,18 @@
+<div class="image-viewer"
+    [ngClass]="{'vertical-layout': orientation === 'vertical', 'horizontal-layout': orientation === 'horizontal'}">
+    <!-- Imagen principal -->
+    <div class="main-image-container" *ngIf="orientation === 'horizontal'">
+        <img [src]="'data:image/png;base64,' + mainImage" alt="Imagen principal" class="main-image" />
+    </div>
+    
+    <!-- Miniaturas -->
+    <div class="thumbnail-container">
+        <img *ngFor="let img of images" [src]="'data:image/png;base64,' + img" alt="Miniatura" class="thumbnail"
+            [class.selected]="img === mainImage" (click)="changeMainImage(img)" />
+    </div>
+
+    <!-- Imagen principal -->
+    <div class="main-image-container" *ngIf="orientation === 'vertical'">
+        <img [src]="'data:image/png;base64,' + mainImage" alt="Imagen principal" class="main-image" />
+    </div>
+</div>

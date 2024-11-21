@@ -93,4 +93,3 @@ def insert_files(files, catalog):
     # Eliminar archivos después de procesarlos
     for filepath in filenames:
         os.remove(filepath)
-
