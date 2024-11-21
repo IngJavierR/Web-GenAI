@@ -21,6 +21,8 @@ import { MarketplaceComponent } from './pages/marketplace/marketplace.component'
 import { ProductCardComponent } from './common/marketplace/product-card/product-card.component';
 import { ProductDetailComponent } from './common/marketplace/product-detail/product-detail.component';
 import { ImageViewerComponent } from './common/marketplace/image-viewer/image-viewer.component';
+import { ProductCardMlComponent } from './common/marketplace/product-card-ml/product-card-ml.component';
+import { ProductDetailMlComponent } from './common/marketplace/product-detail-ml/product-detail-ml.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +33,9 @@ import { ImageViewerComponent } from './common/marketplace/image-viewer/image-vi
     MarketplaceComponent,
     ProductCardComponent,
     ProductDetailComponent,
-    ImageViewerComponent
+    ImageViewerComponent,
+    ProductCardMlComponent,
+    ProductDetailMlComponent
   ],
   imports: [
     BrowserModule,

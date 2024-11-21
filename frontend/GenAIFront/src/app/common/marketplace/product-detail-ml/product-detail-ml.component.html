@@ -1,27 +1,23 @@
 <div class="product-detail">
-    
-    <app-image-viewer [images]="product.imagenes" orientation="horizontal"></app-image-viewer>
+    <app-image-viewer [images]="product.imagenes" orientation="vertical"></app-image-viewer>
 
     <!-- Información del producto -->
     <div class="product-info">
         <h1>{{ product.nombre }}</h1>
-        <p>{{ product.codigo }}</p>
         <p class="description">{{ product.descripcion_corta }}</p>
-        <p class="brand">Marca: {{ product.marca }}</p>
-
-        <!-- Sección de precios -->
-        <div class="pricing">
-            <div class="discount">{{ product.promocion }}</div>
-            <div class="price">
-                <span class="current-price">{{ product.precio }}</span>
-                <span class="original-price">$1,158.00</span>
-            </div>
-        </div>
         
+        <p class="original-price">$1,158.00</p>
+        <div class="price">
+            <span class="current-price">{{ product.precio }}</span>
+            <span class="promotion"> 30% OFF</span>
+        </div>
+        <div class="free">
+            <span class="promotion">Envío gratis</span><span> por ser tu primera compra</span>
+        </div>
+
         <!-- Detalles adicionales -->
         <div class="details">
             <p><strong>Detalle:</strong></p>
-            <p>{{ product.descripcion_larga }}</p>
             <p><strong>Tipo de acabado:</strong> {{ product.caracteristicas.tipo_acabado }}</p>
             <p><strong>Base de bombilla:</strong> {{ product.caracteristicas.base_bombilla }}</p>
             <p><strong>Tipo de lámpara:</strong> {{ product.caracteristicas.tipo_lampara }}</p>

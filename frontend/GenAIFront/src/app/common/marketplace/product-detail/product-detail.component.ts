@@ -7,6 +7,7 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class ProductDetailComponent implements OnInit {
   @Input() product: any;
+  @Input() orientation: 'horizontal' | 'vertical' = 'horizontal'; // Orientación del carrusel
   
   constructor() { }
 

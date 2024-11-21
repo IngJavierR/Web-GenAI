@@ -8,6 +8,7 @@ import { Component, OnInit, Input } from '@angular/core';
 export class ImageViewerComponent implements OnInit {
 
   @Input() images: string[] = []; // Arreglo de imágenes en Base64
+  @Input() orientation: 'horizontal' | 'vertical' = 'horizontal'; // Orientación del carrusel
   mainImage: string = ''; // Imagen principal
 
   constructor() { }

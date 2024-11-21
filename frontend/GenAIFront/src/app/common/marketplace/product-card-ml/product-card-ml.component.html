@@ -1,0 +1,19 @@
+<div class="card">
+    <!-- Imagen del producto -->
+    <div class="image-container">
+        <img [src]="'data:image/png;base64,' + product.imagenes[2]" alt="{{ product.nombre }}" />
+    </div>
+
+    <!-- Información del producto -->
+    <div class="product-info">
+        <h3>{{ product.nombre }}</h3>
+        <p class="original-price">$1,158.00</p>
+        <div class="price">
+            <span class="current-price">{{ product.precio }}</span>
+            <span class="promotion"> 30% OFF</span>
+        </div>
+        <div class="free">
+            <span class="promotion">Envío gratis</span><span> por ser tu primera compra</span>
+        </div>
+    </div>
+</div>
