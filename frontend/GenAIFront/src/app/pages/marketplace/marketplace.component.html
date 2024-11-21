@@ -1,0 +1,14 @@
+<div class="container">
+  <!-- Botón para hacer la solicitud -->
+  <button
+    mat-raised-button
+    color="primary"
+    (click)="fetchProductData()">
+    {{ isLoading ? 'Cargando...' : 'Publicar producto a Marketplaces' }}
+  </button>
+
+  <div *ngIf="productData" class="marketplaces">
+    <app-product-card [product]="productData"></app-product-card>
+    <app-product-detail [product]="productData"></app-product-detail>
+  </div>
+</div>

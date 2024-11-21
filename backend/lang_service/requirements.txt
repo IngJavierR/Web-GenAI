@@ -12,3 +12,7 @@ tiktoken
 boto3
 tweepy
 faker
+
+pandas
+openpyxl
+pillow

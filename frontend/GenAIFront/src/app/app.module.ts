@@ -7,6 +7,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatSelectModule } from '@angular/material/select';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -16,13 +17,21 @@ import { TweetPreviewComponent } from './pages/tweet-preview/tweet-preview.compo
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { RecipeRecommendationComponent } from './pages/recipe-recommendation/recipe-recommendation.component';
+import { MarketplaceComponent } from './pages/marketplace/marketplace.component';
+import { ProductCardComponent } from './common/marketplace/product-card/product-card.component';
+import { ProductDetailComponent } from './common/marketplace/product-detail/product-detail.component';
+import { ImageViewerComponent } from './common/marketplace/image-viewer/image-viewer.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ChatDocumentsComponent,
     TweetPreviewComponent,
-    RecipeRecommendationComponent
+    RecipeRecommendationComponent,
+    MarketplaceComponent,
+    ProductCardComponent,
+    ProductDetailComponent,
+    ImageViewerComponent
   ],
   imports: [
     BrowserModule,
@@ -34,6 +43,7 @@ import { RecipeRecommendationComponent } from './pages/recipe-recommendation/rec
     MatIconModule,
     MatFormFieldModule,
     MatGridListModule,
+    MatSelectModule,
     FormsModule,
     BrowserAnimationsModule,
     HttpClientModule,

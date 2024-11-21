@@ -1,0 +1,38 @@
+<div class="card">
+    <!-- Imagen del producto -->
+    <div class="image-container">
+        <img [src]="'data:image/png;base64,' + product.imagenes[0]" alt="{{ product.nombre }}" />
+    </div>
+
+    <!-- Promoción -->
+    <div class="promotion">
+        <span class="discount">{{ product.promocion }}</span>
+        <span>Promoción</span>
+    </div>
+
+    <!-- Información del producto -->
+    <div class="product-info">
+        <h3>{{ product.nombre }}</h3>
+        <div class="rating">
+            <span>4.5</span>
+            <mat-icon>star</mat-icon>
+            <mat-icon>star</mat-icon>
+            <mat-icon>star</mat-icon>
+            <mat-icon>star</mat-icon>
+            <mat-icon>star_half</mat-icon>
+            <span>(32)</span>
+        </div>
+        <div class="price">
+            <span class="current-price">{{ product.precio }}</span>
+            <span class="original-price">$1,158.00</span>
+        </div>
+        <p class="prime-info">
+            <mat-icon>local_shipping</mat-icon> Recíbelo mañana, 22 de noviembre
+        </p>
+    </div>
+
+    <!-- Botón Agregar al Carrito -->
+    <button mat-raised-button color="accent" class="add-to-cart-btn">
+        Agregar al carrito
+    </button>
+</div>

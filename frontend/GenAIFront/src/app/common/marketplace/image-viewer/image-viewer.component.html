@@ -1,0 +1,12 @@
+<div class="image-viewer">
+    <!-- Imagen principal -->
+    <div class="main-image-container">
+        <img [src]="'data:image/png;base64,' + mainImage" alt="Imagen principal" class="main-image" />
+    </div>
+
+    <!-- Carrusel de miniaturas -->
+    <div class="thumbnail-container">
+        <img *ngFor="let img of images" [src]="'data:image/png;base64,' + img" alt="Miniatura" class="thumbnail"
+            [class.selected]="img === mainImage" (click)="changeMainImage(img)" />
+    </div>
+</div>
