@@ -3,7 +3,8 @@ from db_answer import answer_db_question
 from documents import answer_chatbot_question, insert_files, reset_db
 from content_generator import post_content, get_preview_content
 from recipe_generator import recipe_generator
-from flask_cors import CORS, cross_origin
+from marketplace_generator import marketplace_generator
+from flask_cors import CORS
 
 app = Flask(__name__)
 cors = CORS(app)
@@ -108,7 +109,6 @@ def get_content():
         print('Error', error)
         return jsonify({"Status":"Failure --- some error occured"}), 400
 
-
 @app.route('/recipe',methods = ["GET"])
 def get_recipe():
     try:
@@ -125,6 +125,15 @@ def get_recipe():
         print('Error', error)
         return jsonify({"Status":"Failure --- some error occured"}), 400
 
+@app.route('/marketplace', methods = ["GET"])
+def get_marketplace():
+    try:
+        response = marketplace_generator()
+        print('Response: ', response)
+        return jsonify(response), 200
+    except Exception as error:
+        print('Error', error)
+        return jsonify({"Status":"Failure --- some error occured"}), 400
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=8095, debug=False)

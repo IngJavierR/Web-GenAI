@@ -1,0 +1,44 @@
+<div class="container">
+  <!-- Botón para hacer la solicitud -->
+  <button
+    mat-raised-button
+    color="primary"
+    (click)="fetchProductData()"
+    [disabled]="isLoading"
+  >
+    {{ isLoading ? 'Cargando...' : 'Publicar producto a Marketplaces' }}
+  </button>
+
+  <div *ngIf="productData" class="marketplaces">
+    <!-- Vista de Amazon -->
+    <div class="marketplace amazon">
+      <h2>Amazon Marketplace</h2>
+      <img
+        *ngFor="let img of productData.imagenes"
+        [src]="'data:image/png;base64,' + img"
+        alt="Producto"
+      />
+      <p><strong>Código:</strong> {{ productData.codigo }}</p>
+      <p><strong>Nombre:</strong> {{ productData.nombre }}</p>
+      <p><strong>Marca:</strong> {{ productData.marca }}</p>
+      <p><strong>Descripción:</strong> {{ productData.descripcion_larga }}</p>
+      <p><strong>Precio:</strong> {{ productData.precio }}</p>
+    </div>
+
+    <!-- Vista de Mercado Libre -->
+    <div class="marketplace mercadolibre">
+      <h2>Mercado Libre</h2>
+      <img
+        *ngFor="let img of productData.imagenes"
+        [src]="'data:image/png;base64,' + img"
+        alt="Producto"
+      />
+      <p><strong>Código:</strong> {{ productData.codigo }}</p>
+      <p><strong>Nombre:</strong> {{ productData.nombre }}</p>
+      <p><strong>Marca:</strong> {{ productData.marca }}</p>
+      <p><strong>Descripción corta:</strong> {{ productData.descripcion_corta }}</p>
+      <p><strong>Promoción:</strong> {{ productData.promocion }}</p>
+      <p><strong>Precio:</strong> {{ productData.precio }}</p>
+    </div>
+  </div>
+</div>
