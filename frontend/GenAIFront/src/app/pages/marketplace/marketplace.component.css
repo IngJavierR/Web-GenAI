@@ -7,28 +7,3 @@
   gap: 16px;
   margin-top: 20px;
 }
-
-.marketplace {
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  padding: 16px;
-  flex: 1;
-  text-align: center;
-}
-
-.marketplace img {
-  width: 100px;
-  height: 100px;
-  margin: 5px;
-  object-fit: contain;
-}
-
-.marketplace h2 {
-  font-size: 1.5em;
-  margin-bottom: 10px;
-}
-
-.marketplace p {
-  margin: 5px 0;
-  font-size: 0.9em;
-}

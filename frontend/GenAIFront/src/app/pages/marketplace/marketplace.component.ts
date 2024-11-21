@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 @Component({
@@ -6,11 +6,15 @@ import { HttpClient } from '@angular/common/http';
   templateUrl: './marketplace.component.html',
   styleUrls: ['./marketplace.component.css']
 })
-export class MarketplaceComponent {
+export class MarketplaceComponent implements OnInit  {
   productData: any = null;
   isLoading: boolean = false;
 
   constructor(private http: HttpClient) {}
+
+  ngOnInit(): void {
+
+  }
 
   fetchProductData() {
     this.isLoading = true;

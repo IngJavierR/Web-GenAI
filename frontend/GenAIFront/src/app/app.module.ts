@@ -18,6 +18,9 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { RecipeRecommendationComponent } from './pages/recipe-recommendation/recipe-recommendation.component';
 import { MarketplaceComponent } from './pages/marketplace/marketplace.component';
+import { ProductCardComponent } from './common/marketplace/product-card/product-card.component';
+import { ProductDetailComponent } from './common/marketplace/product-detail/product-detail.component';
+import { ImageViewerComponent } from './common/marketplace/image-viewer/image-viewer.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +28,10 @@ import { MarketplaceComponent } from './pages/marketplace/marketplace.component'
     ChatDocumentsComponent,
     TweetPreviewComponent,
     RecipeRecommendationComponent,
-    MarketplaceComponent
+    MarketplaceComponent,
+    ProductCardComponent,
+    ProductDetailComponent,
+    ImageViewerComponent
   ],
   imports: [
     BrowserModule,
