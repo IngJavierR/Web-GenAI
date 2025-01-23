@@ -9,7 +9,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 # Datos de conexión
-DB_NAME = os.environ.get('DATABASE')
+DB_NAME = os.environ.get('DATABASE_PRODUCTS')
 DB_USER = os.environ.get('DBUSER')
 DB_PASSWORD = os.environ.get('DBPASS')
 DB_HOST = os.environ.get('IPDB')

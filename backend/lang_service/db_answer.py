@@ -73,6 +73,6 @@ def database_origin(catalog):
         DB_PASS = os.environ.get('DBPASS')
         DB_PORT = os.environ.get('DBPORT')
         IP_DB = os.environ.get('IPDB')
-        DATABASE_NAME = 'products_inventory'
+        DATABASE_NAME = os.environ.get('DATABASE_PRODUCTS')
 
     return DB_USER, DB_PASS, DB_PORT, IP_DB, DATABASE_NAME

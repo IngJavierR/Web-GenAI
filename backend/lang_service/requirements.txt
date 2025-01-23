@@ -6,7 +6,7 @@ langchain_experimental
 Flask
 flask-cors
 pyepsilla
-sentence_transformers
+#sentence_transformers
 pypdf
 tiktoken
 boto3
