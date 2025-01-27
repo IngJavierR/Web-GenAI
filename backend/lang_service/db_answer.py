@@ -75,4 +75,13 @@ def database_origin(catalog):
         IP_DB = os.environ.get('IPDB')
         DATABASE_NAME = os.environ.get('DATABASE_PRODUCTS')
 
+    elif catalog == 'people':
+        DB_USER = os.environ.get('DBUSER')
+        DB_PASS = os.environ.get('DBPASS')
+        DB_PORT = os.environ.get('DBPORT')
+        IP_DB = os.environ.get('IPDB')
+        DATABASE_NAME = os.environ.get('DATABASE_RESUMES')
+
+
+
     return DB_USER, DB_PASS, DB_PORT, IP_DB, DATABASE_NAME

@@ -6,6 +6,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatTableModule } from '@angular/material/table';
 import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -16,13 +19,15 @@ import { TweetPreviewComponent } from './pages/tweet-preview/tweet-preview.compo
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { RecipeRecommendationComponent } from './pages/recipe-recommendation/recipe-recommendation.component';
+import { DocumentProcessingComponent } from './pages/document-processing/document-processing.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ChatDocumentsComponent,
     TweetPreviewComponent,
-    RecipeRecommendationComponent
+    RecipeRecommendationComponent,
+    DocumentProcessingComponent
   ],
   imports: [
     BrowserModule,
@@ -34,6 +39,9 @@ import { RecipeRecommendationComponent } from './pages/recipe-recommendation/rec
     MatIconModule,
     MatFormFieldModule,
     MatGridListModule,
+    MatDividerModule,
+    MatProgressBarModule,
+    MatTableModule,
     FormsModule,
     BrowserAnimationsModule,
     HttpClientModule,

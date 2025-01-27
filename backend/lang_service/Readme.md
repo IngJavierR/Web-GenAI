@@ -34,6 +34,9 @@ pip install -r requirements.txt
 [Crear BD products_inventory]
 create database products_inventory;
 
+[Crear BD resumes]
+create database db_resumes;
+
 [Crear BD Tablas en products_inventory]
 Execute scripts_db/schema_products.sql
 
@@ -45,6 +48,9 @@ Execute scripts_db/schema_pruebas.sql
 
 [Insertar Registros en pruebas]
 python scripts_db/inserts_task.py
+
+[Crear BD Tablas en db_resumes]
+Execute scripts_db/schema_resumes.sql
 ```
 
 ## Deploy
@@ -66,6 +72,7 @@ python main.py
 Database Catalog:
 * itsm
 * retail
+* people
 
 KnowledgeBase Catalog:
 * chatbot

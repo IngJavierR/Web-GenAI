@@ -6,6 +6,7 @@ langchain_experimental
 Flask
 flask-cors
 pyepsilla
+pydantic==2.9.2
 #sentence_transformers
 pypdf
 tiktoken

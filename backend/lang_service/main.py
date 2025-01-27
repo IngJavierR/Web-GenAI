@@ -4,6 +4,7 @@ from documents import answer_chatbot_question, insert_files, reset_db
 from content_generator import post_content, get_preview_content
 from recipe_generator import recipe_generator
 from code_generator import code_suggestion, code_explanation, code_files_image_based, code_files
+from resumes import analize_resumes, get_resumes_db
 from flask_cors import CORS, cross_origin
 
 app = Flask(__name__)
@@ -122,6 +123,56 @@ def get_recipe():
 
         print('Response: ', response)
         return jsonify(response), 200
+    except Exception as error:
+        print('Error', error)
+        return jsonify({"Status":"Failure --- some error occured"}), 400
+
+@app.route('/resumes',methods = ["POST"])
+def upload_resumes():
+    try:
+        print("Request Files", request.files)
+        print("Request", request.files.getlist('files[]'))
+        if 'files[]' not in request.files:
+            return jsonify({'error': 'No files part in the request'}), 400
+
+        files = request.files.getlist('files[]')
+        catalog = request.form.get("catalog")
+        if not files:
+            return jsonify({'error': 'No files uploaded'}), 400
+
+        analize_resumes(files, catalog)
+
+        return jsonify({}), 200
+    except Exception as error:
+        print('Error', error)
+        return jsonify({"Status":"Failure --- some error occured"}), 400
+
+@app.route('/resumes',methods = ["GET"])
+def get_resumes():
+    try:
+        print("Request Files", request.files)
+
+        catalog = request.args.get("catalog")
+        print('catalog', catalog)
+
+        response = get_resumes_db(catalog)
+
+        print('Response: ', response)
+
+        return jsonify(response), 200
+    except Exception as error:
+        print('Error', error)
+        return jsonify({"Status":"Failure --- some error occured"}), 400
+
+@app.route('/resumes',methods = ["DELETE"])
+def delete_resumes():
+    try:
+        catalog = request.args.get('catalog')
+        print('catalog', catalog)
+
+        reset_db(catalog)
+
+        return jsonify({}), 200
     except Exception as error:
         print('Error', error)
         return jsonify({"Status":"Failure --- some error occured"}), 400

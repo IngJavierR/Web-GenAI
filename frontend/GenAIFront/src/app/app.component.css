@@ -50,7 +50,11 @@ html, body {
   }
 
   .main-content {
+    width: 100%;
+  }
+  /* .main-content {
     flex: 1;
     display: flex;
     flex-direction: column;
-  }
+    height: 1000px;
+  } */
