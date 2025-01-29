@@ -1,5 +1,5 @@
 <mat-card class="profile-card">
-    
+
     <div class="profile">
         <div class="drag-drop-area" (drop)="onDrop($event)" (dragover)="onDragOver($event)">
         <p>Drag & Drop PDF Here</p>
@@ -7,7 +7,7 @@
         <p *ngIf="uploadedFile">{{ uploadedFile.name }}</p>
     </div>
 
-    <!-- <mat-divider></mat-divider>
+    <mat-divider></mat-divider>
 
     <div class="profile">
         <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 full-table">
@@ -27,9 +27,9 @@
             <td mat-cell *matCellDef="let element" (click)="onRowClicked(element)"> {{element.apellido}} </td>
             </ng-container>
 
-            <ng-container matColumnDef="fecha_nacimiento">
-            <th mat-header-cell *matHeaderCellDef> Fecha de Nacimiento </th>
-            <td mat-cell *matCellDef="let element" (click)="onRowClicked(element)"> {{element.fecha_nacimiento | date}} </td>
+            <ng-container matColumnDef="telefono">
+            <th mat-header-cell *matHeaderCellDef> Teléfono </th>
+            <td mat-cell *matCellDef="let element" (click)="onRowClicked(element)"> {{element.telefono}} </td>
             </ng-container>
 
             <ng-container matColumnDef="email">
@@ -40,33 +40,49 @@
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
             <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="onRowClicked(row)"></tr>
         </table>
-    </div> -->
+    </div>
 
     <mat-divider></mat-divider>
 
-    <div class="profile">
-        <!-- <img mat-card-avatar src="assets/avatar-placeholder.png" alt="Profile Image" /> -->
-        <h3>John Doe</h3>
-        <p>Graphics & Web Designer</p>
+    <!-- Sección selected profile -->
+    <div class="selected-profile">
+        <h3>Nombre: {{profile.nombre}}</h3>
+        <p>Apellido: {{profile.apellido}}</p>
         <div class="contact-info">
-        <p>Email: john.doe@example.com</p>
-        <p>Phone: +123456789</p>
+        <p>Email: {{profile.email}}</p>
+        <p>Phone: {{profile.telefono}}</p>
         </div>
         <p class="about-me">
-        This is a sample text. Introduce yourself and enter your desired text here.
+        {{profile.descripcion}}
         </p>
-    </div>
     
-    <div class="profile">
         <h4>Work Experience</h4>
         <ul>
-        <li *ngFor="let exp of workExperience">{{ exp }}</li>
+            <li *ngFor="let exp of profile.experiencia">
+                <div>Empresa: {{ exp.empresa }}</div>
+                <div>Puesto: {{ exp.puesto }}</div>
+                <div>Fecha de Inicio: {{ exp.fecha_inicio }}</div>
+                <div>Fecha de Fin: {{ exp.fecha_fin }}</div>
+                <div>Descripción: {{ exp.descripcion }}</div>
+                <div>Actividades:
+                    <ul>
+                    <li *ngFor="let actividad of exp.actividades">{{ actividad.descripcion }}</li>
+                    </ul>
+                </div>
+            </li>
         </ul>
         <h4>Education</h4>
         <ul>
-        <li *ngFor="let edu of education">{{ edu }}</li>
+            <li *ngFor="let edu of profile.educacion">
+            {{ edu.institucion }} - {{ edu.titulo }} ({{ edu.fecha_inicio }} - {{ edu.fecha_fin }})
+            </li>
+        </ul>
+        <h4>Certificaciones</h4>
+        <ul>
+            <li *ngFor="let edu of profile.certificaciones">
+                {{ edu.institucion }} - {{ edu.certificacion }} ({{ edu.fecha_obtencion }} - {{ edu.fecha_expiracion }})
+            </li>
         </ul>
     </div>
     
 </mat-card>
-  

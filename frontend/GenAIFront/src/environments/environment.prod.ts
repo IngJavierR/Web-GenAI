@@ -4,5 +4,6 @@ export const environment = {
   chat_documents: '',
   content: '',
   files: '',
-  recipe: ''
+  recipe: '',
+  resumes: ''
 };

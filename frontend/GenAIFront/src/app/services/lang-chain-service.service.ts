@@ -7,6 +7,7 @@ import { ContentResponse } from '../model/content-response';
 import { ContentRequest } from '../model/content-request';
 import { ContentPostRequest } from '../model/content-post-request';
 import { RecipeResponse } from '../model/recipe-response';
+import { ResumeResponse } from '../model/resume-response';
 
 @Injectable({
   providedIn: 'root'
@@ -77,6 +78,36 @@ export class LangChainServiceService {
 
     return new Observable<any>((observer) => {
         this.http.post<any>(environment.files, formData).subscribe((response) => {
+          this.returnResponse(observer, response)
+        }, (err)=>{
+          this.returnError(observer, err)
+        })
+    }) 
+  }
+
+  resumeUpload(formData: FormData): Observable<any> {
+
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'multipart/form-data',
+        'Accept': "*/*"
+      })
+    };
+
+    return new Observable<any>((observer) => {
+        this.http.post<any>(environment.resumes, formData).subscribe((response) => {
+          this.returnResponse(observer, response)
+        }, (err)=>{
+          this.returnError(observer, err)
+        })
+    }) 
+  }
+
+  resumeGet(): Observable<ResumeResponse[]> {
+    return new Observable<any>((observer) => {
+      let objParams = new HttpParams();
+      objParams = objParams.append('catalog', 'people');
+        this.http.get<any>(environment.resumes, {params: objParams}).subscribe((response) => {
           this.returnResponse(observer, response)
         }, (err)=>{
           this.returnError(observer, err)

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
+import { ResumeResponse } from 'src/app/model/resume-response';
+import { LangChainServiceService } from 'src/app/services/lang-chain-service.service';
 
 interface Profile {
   id: number;
@@ -16,47 +18,32 @@ interface Profile {
 })
 export class DocumentProcessingComponent implements OnInit {
 
-  displayedColumns: string[] = ['id', 'nombre', 'apellido', 'fecha_nacimiento', 'email'];
-  
-  dataSource = new MatTableDataSource<Profile>([
-    { id: 1, nombre: 'Juan', apellido: 'Perez', fecha_nacimiento: new Date('1990-01-01'), email: 'juan.perez@example.com' },
-    { id: 2, nombre: 'Ana', apellido: 'Gomez', fecha_nacimiento: new Date('1985-05-15'), email: 'ana.gomez@example.com' },
-    { id: 3, nombre: 'Luis', apellido: 'Martinez', fecha_nacimiento: new Date('1978-11-30'), email: 'luis.martinez@example.com' }
-  ]);
+  formData = new FormData()
+  profile = new ResumeResponse();
 
-  workExperience = [
-    '2020-2023: Senior Designer at Company A',
-    '2018-2020: Junior Designer at Company B',
-    '2016-2018: Intern at Company C'
-  ];
+  constructor(
+      private langService: LangChainServiceService,
+    ) { }
 
-  education = [
-    '2006-2010: Bachelor of Design, University A',
-    '2010-2012: Master of Design, University B'
-  ];
+  displayedColumns: string[] = ['id', 'nombre', 'apellido', 'telefono', 'email'];
 
-  skills = [
-    { name: 'Graphic Design', level: 80 },
-    { name: 'Web Design', level: 70 },
-    { name: 'Logo Design', level: 60 }
-  ];
+  dataSource = new MatTableDataSource<ResumeResponse>([]);
 
   uploadedFile: File | null = null;
 
   ngOnInit(): void {
-    this.dataSource.filterPredicate = (data: Profile, filter: string) => {
-      const dataStr = Object.values(data).join(' ').toLowerCase();
-      return dataStr.includes(filter);
-    };
+    this.reloadResumes();
   }
 
-  onRowClicked(selectedProfile: Profile) : void {
-    
+  reloadResumes() {
+    this.langService.resumeGet().subscribe((response: ResumeResponse[])=> {
+      this.dataSource.data = response
+      console.log('Response', response);
+    });
   }
 
-  applyFilter(event: Event): void {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
+  onRowClicked(selectedProfile: ResumeResponse) : void {
+    this.profile = selectedProfile;
   }
 
   onDragOver(event: DragEvent): void {
@@ -68,6 +55,15 @@ export class DocumentProcessingComponent implements OnInit {
     const files = event.dataTransfer?.files;
     if (files && files.length > 0) {
       this.uploadedFile = files[0];
+      let fileBlob = new Blob([this.uploadedFile], {type: this.uploadedFile.type});
+
+      this.formData = new FormData();
+      this.formData.append("files[]", fileBlob, this.uploadedFile.name);
+      this.formData.append("catalog", "people");
+      this.langService.resumeUpload(this.formData).subscribe((response: any)=> {
+        this.reloadResumes();
+      });
+
       console.log('Uploaded file:', this.uploadedFile);
     }
   }

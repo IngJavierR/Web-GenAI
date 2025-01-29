@@ -24,6 +24,11 @@ html, body {
     padding: 20px;
   }
 
+  .selected-profile {
+    max-height: 600px; 
+    overflow-y: auto;
+  }
+
   .full-table, .full-input {
     width: 100%;
   }

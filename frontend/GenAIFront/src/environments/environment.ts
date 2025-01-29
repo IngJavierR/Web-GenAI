@@ -8,7 +8,8 @@ export const environment = {
   chat_documents: 'http://localhost:8095/doc',
   content: 'http://localhost:8095/content',
   files: 'http://localhost:8095/files',
-  recipe: 'http://localhost:8095/recipe'
+  recipe: 'http://localhost:8095/recipe',
+  resumes: 'http://localhost:8095/resumes'
 };
 
 /*
