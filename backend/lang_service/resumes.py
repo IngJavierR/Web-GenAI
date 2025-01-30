@@ -107,6 +107,7 @@ def insert_db(catalog, sentence):
     except Exception as e:
         print('Sentence', sentence)
         print('Error al insertar', e)
+        raise Exception(e)
     finally:
         if conn is not None:
             conn.close()
@@ -298,10 +299,9 @@ def get_resumes_db(catalog):
 
     except Exception as e:
         print('Error al insertar', e)
+        raise Exception(e)
     finally:
         if conn is not None:
             conn.close()
         if cur is not None:
             cur.close()
-
-    return []

@@ -9,6 +9,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatTableModule } from '@angular/material/table';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -42,6 +43,7 @@ import { DocumentProcessingComponent } from './pages/document-processing/documen
     MatDividerModule,
     MatProgressBarModule,
     MatTableModule,
+    MatSnackBarModule,
     FormsModule,
     BrowserAnimationsModule,
     HttpClientModule,

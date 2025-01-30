@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { RecipeResponse } from 'src/app/model/recipe-response';
 import { LangChainServiceService } from 'src/app/services/lang-chain-service.service';
+import { DataService } from '../../services/data.service';
 
 @Component({
   selector: 'app-recipe-recommendation',
@@ -17,6 +18,7 @@ export class RecipeRecommendationComponent implements OnInit {
 
   constructor(
     private langService: LangChainServiceService,
+    private dataService: DataService
   ) { }
 
   ngOnInit(): void {
@@ -24,11 +26,16 @@ export class RecipeRecommendationComponent implements OnInit {
 
   sendMessage() {
     if (this.userInput.trim()) {
+      this.dataService.setIsLoading(true);
       this.langService.recipeGet(this.userInput).subscribe((response: RecipeResponse) => {
         this.recipeName = response.recipe_name;
         this.ingredients = response.ingredients;
         this.recipes = response.recipes;
-        this.urls = response.urls
+        this.urls = response.urls;
+        this.dataService.setIsLoading(false);
+      }, (error: Error) => {
+        this.dataService.setIsLoading(false);
+        this.dataService.setGeneralNotificationMessage(error.message);
       });
     }
 

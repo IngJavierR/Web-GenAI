@@ -3,6 +3,7 @@ import { LangChainServiceService } from '../../services/lang-chain-service.servi
 import { ContentResponse } from 'src/app/model/content-response';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { log } from 'console';
+import { DataService } from '../../services/data.service';
 
 @Component({
   selector: 'app-tweet-preview',
@@ -26,7 +27,8 @@ export class TweetPreviewComponent {
 
   constructor(
     private langService: LangChainServiceService,
-    private _sanitizer: DomSanitizer
+    private _sanitizer: DomSanitizer,
+    private dataService: DataService
   ) { }
 
   onFileSelected(event: any) {
@@ -41,7 +43,14 @@ export class TweetPreviewComponent {
       this.formData = new FormData();
       this.formData.append("files[]", fileBlob, this.selectedFile[0].name);
       this.formData.append("catalog", "contentmanager");
-      this.langService.fileUpload(this.formData).subscribe((response: any)=> {});
+      this.dataService.setIsLoading(true);
+      this.langService.fileUpload(this.formData).subscribe((response: any)=> {
+        this.dataService.setIsLoading(false);
+      }, 
+      (error: Error) => {
+        this.dataService.setIsLoading(false);
+        this.dataService.setGeneralNotificationMessage(error.message);
+      });
    }
   }
 
@@ -50,6 +59,7 @@ export class TweetPreviewComponent {
   }
 
   generatePreview() {
+    this.dataService.setIsLoading(true);
     this.langService.contentPreview({
       query: this.prompt,
       include_image: this.isImageRequired,
@@ -62,36 +72,55 @@ export class TweetPreviewComponent {
         + response.image_base64);
       this.imageName = response.image_name;
       this.previewGenerated = true;
+      this.dataService.setIsLoading(false);
+    }, (error: Error) => {
+      this.dataService.setIsLoading(false);
+      this.dataService.setGeneralNotificationMessage(error.message);
     });
   }
 
   publishTweet() {
+    this.dataService.setIsLoading(true);
     this.langService.contentPost({
       image_name: this.imageName,
       text: this.tweetText,
       type: 'twitter'
     }).subscribe((response: any) => {
       console.log('Tuit publicado:', this.tweetText, this.image);
+      this.dataService.setIsLoading(false);
+    }, (error: Error) => {
+      this.dataService.setIsLoading(false);
+      this.dataService.setGeneralNotificationMessage(error.message);
     });
   }
 
   publishFacebook() {
+    this.dataService.setIsLoading(true);
     this.langService.contentPost({
       image_name: this.imageName,
       text: this.postText,
       type: 'facebook',
     }).subscribe((response: any) => {
       console.log('Post publicado:', this.tweetText, this.image);
+      this.dataService.setIsLoading(false);
+    }, (error: Error) => {
+      this.dataService.setIsLoading(false);
+      this.dataService.setGeneralNotificationMessage(error.message);
     });
   }
 
   publishEmail() {
+    this.dataService.setIsLoading(true);
     this.langService.contentPost({
       image_name: this.imageName,
       text: this.postText,
       type: 'email',
     }).subscribe((response: any) => {
       console.log('Email enviado:', this.tweetText, this.image);
+      this.dataService.setIsLoading(false);
+    }, (error: Error) => {
+      this.dataService.setIsLoading(false);
+      this.dataService.setGeneralNotificationMessage(error.message);
     });
   }
 }

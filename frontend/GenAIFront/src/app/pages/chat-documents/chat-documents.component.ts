@@ -3,6 +3,7 @@ import { LangChainServiceService } from '../../services/lang-chain-service.servi
 import { QueryResponse } from 'src/app/model/query-response';
 import { VoiceRecognitionService } from 'src/app/services/voice-recognition.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { DataService } from '../../services/data.service';
 
 interface Message {
   text: string;
@@ -29,6 +30,7 @@ export class ChatDocumentsComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
+    private dataService: DataService,
     private langService: LangChainServiceService,
     private voiceRecognition: VoiceRecognitionService
   ) { }
@@ -86,7 +88,14 @@ export class ChatDocumentsComponent implements OnInit {
       this.formData = new FormData();
       this.formData.append("files[]", fileBlob, this.selectedFile[0].name);
       this.formData.append("catalog", "chatbot");
-      this.langService.fileUpload(this.formData).subscribe((response: any)=> {});
+      this.dataService.setIsLoading(true);
+      this.langService.fileUpload(this.formData).subscribe((response: any)=> {
+        this.dataService.setIsLoading(false);
+      }, 
+      (error: Error) => {
+        this.dataService.setIsLoading(false);
+        this.dataService.setGeneralNotificationMessage(error.message);
+      });
    }
   }
 
@@ -102,6 +111,7 @@ export class ChatDocumentsComponent implements OnInit {
       console.log('ModeType:', this.modeType);
 
       if(this.modeType === 1){
+        this.dataService.setIsLoading(true);
         this.langService.queryDocuments(query).subscribe((response: QueryResponse) => {
           if(isAudio){
             this.voiceRecognition.speech(response.result);
@@ -109,11 +119,16 @@ export class ChatDocumentsComponent implements OnInit {
           this.messages.push({ text: response.result, isUser: false });
           setTimeout(() => {
             this.scrollToBottom();
+            this.dataService.setIsLoading(false);
           }, 100);
-        })
+        }, (error: Error) => {
+          this.dataService.setIsLoading(false);
+          this.dataService.setGeneralNotificationMessage(error.message);
+        });
       }
 
       else if(this.modeType === 0){ 
+        this.dataService.setIsLoading(true);
         this.langService.querySql(query, 'itsm').subscribe((response: QueryResponse) => {
           if(isAudio){
             this.voiceRecognition.speech(response.result);
@@ -121,8 +136,12 @@ export class ChatDocumentsComponent implements OnInit {
           this.messages.push({ text: response.result, isUser: false });
           setTimeout(() => {
             this.scrollToBottom();
+            this.dataService.setIsLoading(false);
           }, 100);
-        })
+        }, (error: Error) => {
+          this.dataService.setIsLoading(false);
+          this.dataService.setGeneralNotificationMessage(error.message);
+        });
       }
 
       //Simulación de respuesta del bot
